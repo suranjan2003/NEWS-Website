@@ -19,6 +19,13 @@ const Slider = ({ isSidebarOpen, toggleSidebar }) => {
     'Miscellaneous',
   ];
 
+  const handleCategoryClick = () => {
+    // Close the sidebar first
+    toggleSidebar();
+    // Reload the home page
+    window.location.reload();
+  };
+
   return (
     <>
       {/* Sidebar */}
@@ -35,7 +42,11 @@ const Slider = ({ isSidebarOpen, toggleSidebar }) => {
           <p className="text-base mt-4">Categories</p> {/* Categories heading */}
           <ul className="px-8 mt-2 font-semibold space-y-2">
             {categories.map((category, index) => (
-              <li key={index} className="cursor-pointer hover:text-red-700">
+              <li
+                key={index}
+                className="cursor-pointer hover:text-red-700"
+                onClick={handleCategoryClick} // Add onClick event handler
+              >
                 {category}
               </li>
             ))}

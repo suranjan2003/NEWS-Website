@@ -24,16 +24,8 @@ const Header = () => {
   return (
     <>
       <nav className="flex justify-between items-center p-4 shadow-md bg-gray-100 relative">
-        {/* Left: Search Icon for small screens */}
-        <div className="block md:hidden">
-          <FiSearch
-            size={24}
-            className="cursor-pointer text-gray-800"
-            onClick={() => setSearchVisible(!searchVisible)}
-          />
-        </div>
-
-        {/* Left: Search Bar for medium and large screens */}
+        
+        {/* Hide search icon on small devices */}
         <div className="hidden md:block w-1/3">
           <input
             type="text"
@@ -42,7 +34,6 @@ const Header = () => {
           />
         </div>
 
-        {/* Center: Company Logo */}
         <div className="absolute left-1/2 transform -translate-x-1/2 h-14">
           <img
             src={isSmallScreen ? '/images/logo.png' : '/images/logoimage.png'}
@@ -51,21 +42,25 @@ const Header = () => {
           />
         </div>
 
-        {/* Right: Hamburger Menu for larger screens only */}
-        {!isSmallScreen && (
-          <div
-            className="cursor-pointer flex flex-col justify-between h-6 w-8 ml-auto"
-            onClick={toggleSidebar}
-          >
-            <FaBars size={24} />
-          </div>
-        )}
+        {/* Show hamburger icon only on larger devices */}
+        <div className="hidden md:flex cursor-pointer flex-col justify-between h-6 w-8 ml-auto" onClick={toggleSidebar}>
+          <FaBars size={24} />
+        </div>
+
+        {/* Show search icon only on small devices */}
+        <div className="block md:hidden">
+          <FiSearch
+            size={24}
+            className="cursor-pointer text-gray-800"
+            onClick={() => setSearchVisible(!searchVisible)}
+          />
+        </div>
       </nav>
 
-      {/* Conditionally Render Search Bar on Small Screens */}
+      {/* Search Bar for Mobile */}
       {searchVisible && (
         <div
-          className="block md:hidden p-4"
+          className="absolute top-14 left-0 right-0 p-4 z-50" // Positioning the search bar
           style={{
             background:
               'linear-gradient(to bottom, rgba(209, 213, 219, 0.9), rgba(209, 213, 219, 0.1))',
@@ -86,4 +81,3 @@ const Header = () => {
 };
 
 export default Header;
-

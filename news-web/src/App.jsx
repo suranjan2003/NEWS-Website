@@ -1,16 +1,24 @@
-import { useState } from 'react'
-import './App.css'
-import Header from './components/Header'
-import BottomNav from './components/BottomNav'
+// src/App.jsx
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Header from './components/Header';
+import BottomNav from './components/BottomNav';
+import Home from './pages/Home';
+import Profile from './pages/Profile';
 
-function App() {
-
+const App = () => {
   return (
-    <div className="bg-gray-200 min-h-screen"> {/* Set gray background color */}
-      <Header />
-      <BottomNav/>
-    </div>
-  )
-}
+    <Router>
+      <div className="bg-gray-200 min-h-screen">
+        <Header />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/profile" element={<Profile />} />
+        </Routes>
+        <BottomNav />
+      </div>
+    </Router>
+  );
+};
 
-export default App
+export default App;
