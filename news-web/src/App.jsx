@@ -1,13 +1,14 @@
 import { useState } from 'react'
 import './App.css'
-import Navbar from './components/Navbar'
+import Header from './components/Header'
+import BottomNav from './components/BottomNav'
 
 function App() {
 
   return (
     <div className="bg-gray-200 min-h-screen"> {/* Set gray background color */}
-      <Navbar />
-      {/* Other components go here */}
+      <Header />
+      <BottomNav/>
     </div>
   )
 }
