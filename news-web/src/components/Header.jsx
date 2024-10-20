@@ -60,10 +60,10 @@ const Header = () => {
       {/* Search Bar for Mobile */}
       {searchVisible && (
         <div
-          className="absolute top-14 left-0 right-0 p-4 z-50" // Positioning the search bar
+          className="absolute top-14 left-0 right-0 p-3 z-50" // Positioning the search bar
           style={{
             background:
-              'linear-gradient(to bottom, rgba(209, 213, 219, 0.9), rgba(209, 213, 219, 0.1))',
+              'linear-gradient(to bottom, rgba(209, 213, 219, 0.9), rgba(209, 213, 219, 0))',
           }}
         >
           <input
