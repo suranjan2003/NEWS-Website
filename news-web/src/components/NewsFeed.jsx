@@ -4,7 +4,7 @@ import NewsCard from './NewsCard';
 
 const NewsFeed = () => {
   const [articles, setArticles] = useState([]);
-  const apiKey = '0531fa2cea8743179afc526d48322bf3'; // Replace with your actual API key
+  const apiKey = '0531fa2cea8743179afc526d48322bf3';
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
@@ -35,7 +35,7 @@ const NewsFeed = () => {
       {articles.length > 0 ? (
         <NewsCard article={articles[currentIndex]} />
       ) : (
-        <p>Loading news...</p>
+        <p className='text-red-500'>Loading news...</p>
       )}
     </div>
   );
