@@ -1,3 +1,4 @@
+// NewsFeed.jsx
 import React, { useEffect, useState } from 'react';
 import { useSwipeable } from 'react-swipeable';
 import NewsCard from './NewsCard';
@@ -42,4 +43,3 @@ const NewsFeed = () => {
 };
 
 export default NewsFeed;
-

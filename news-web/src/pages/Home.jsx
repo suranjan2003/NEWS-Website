@@ -16,10 +16,10 @@ const Home = () => {
   }, []);
 
   return (
-    <>
+    <div className='bg-black'>
       {/* Conditionally render SmallHome for small screens and LargeHome for larger screens */}
       {isSmallScreen ? <SmallHome /> : <LargeHome />}
-    </>
+    </div>
   );
 };
 

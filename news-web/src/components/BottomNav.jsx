@@ -1,31 +1,39 @@
+// BottomNav.jsx
 import React from 'react';
-import { FaHome, FaList, FaUser } from 'react-icons/fa'; // Import icons from react-icons
-import { Link } from 'react-router-dom'; // Import Link for navigation
+import { FaHome, FaList, FaUser } from 'react-icons/fa';
+import { Link, useLocation } from 'react-router-dom';
 
 const BottomNav = () => {
+  const location = useLocation(); // Get the current location
+
+  // Function to determine if the icon is active based on the current path
+  const isActive = (path) => location.pathname === path;
+
   return (
-    <nav className="fixed bottom-0 left-0 right-0 bg-white shadow-lg md:hidden"> {/* Show only on small devices */}
+    <nav className="fixed bottom-0 left-0 right-0 bg-gray-800 shadow-lg md:hidden">
       <ul className="flex justify-around items-center p-2">
-        
+
         {/* Categories Icon */}
-        <li className="flex flex-col items-center text-gray-700 flex-1">
-          <FaList className="text-lg sm:text-xl" /> {/* Responsive icon size */}
-          <span className="text-xs sm:text-sm">Categories</span>
+        <li className="flex flex-col items-center flex-1">
+          <Link to="/categories" className="flex flex-col items-center">
+            <FaList className={`text-lg sm:text-xl ${isActive('/categories') ? 'text-red-500' : 'text-gray-400'}`} /> 
+            <span className={`text-xs sm:text-sm ${isActive('/categories') ? 'text-red-500' : 'text-gray-400'}`}>Categories</span>
+          </Link>
         </li>
 
         {/* Home Icon */}
-        <li className="flex flex-col items-center text-gray-700 flex-1">
+        <li className="flex flex-col items-center flex-1">
           <Link to="/" className="flex flex-col items-center">
-            <FaHome className="text-lg sm:text-xl" /> {/* Responsive icon size */}
-            <span className="text-xs sm:text-sm">Home</span>
+            <FaHome className={`text-lg sm:text-xl ${isActive('/') ? 'text-red-500' : 'text-gray-400'}`} /> 
+            <span className={`text-xs sm:text-sm ${isActive('/') ? 'text-red-500' : 'text-gray-400'}`}>Home</span>
           </Link>
         </li>
 
         {/* Profile Icon */}
-        <li className="flex flex-col items-center text-gray-700 flex-1">
+        <li className="flex flex-col items-center flex-1">
           <Link to="/profile" className="flex flex-col items-center">
-            <FaUser className="text-lg sm:text-xl" /> {/* Responsive icon size */}
-            <span className="text-xs sm:text-sm">Profile</span>
+            <FaUser className={`text-lg sm:text-xl ${isActive('/profile') ? 'text-red-500' : 'text-gray-400'}`} /> 
+            <span className={`text-xs sm:text-sm ${isActive('/profile') ? 'text-red-500' : 'text-gray-400'}`}>Profile</span>
           </Link>
         </li>
 
@@ -35,3 +43,4 @@ const BottomNav = () => {
 };
 
 export default BottomNav;
+
