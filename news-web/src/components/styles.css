@@ -3,21 +3,35 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center; /* Center the news card vertically */
-  height: calc(100vh - 70px - 20px); /* Replace with actual header and bottom nav heights */
-  overflow: hidden; /* Prevent overflow */
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* For larger devices */
+@media (min-width: 768px) {
+  .news-feed {
+    height: calc(100vh - 70px +0px); /* Adjust for larger devices */
+  }
+}
+
+/* For smaller devices */
+@media (max-width: 767px) {
+  .news-feed {
+    height: calc(100vh - 70px); /* Adjust for smaller devices */
+  }
 }
 
 .news-card {
-  width: 100%; /* Full width */
-  height: 700px; /* Full height of the news-feed */
-  display: flex;
-  flex-direction: column; /* Align items vertically */
-  background: white; /* Background color */
-  transition: transform 0.3s ease; /* Smooth transition for swiping */
+  width: 100%;
+  transition: transform 0.3s ease;
 }
 
-.news-card img {
-  width: 100%;
-  height: 250px;
+.small-card {
+  background-color: white;
+  height: 700px; /* For smaller devices */
 }
+
+.large-card {
+  width: 70%; /* Adjust width for larger screens */
+}
+
