@@ -1,5 +1,3 @@
-// NewsFeed.jsx
-// const apiKey = '0531fa2cea8743179afc526d48322bf3';
 import React, { useEffect, useState } from 'react';
 import { useSwipeable } from 'react-swipeable';
 import SmallNewsCard from './SmallNewsCard';
@@ -20,7 +18,14 @@ const NewsFeed = () => {
           `https://newsapi.org/v2/top-headlines?country=us&apiKey=${apiKey}`
         );
         const data = await response.json();
-        setArticles(data.articles);
+
+        // Add a 'liked' field to each article with a default value of 0 (not liked)
+        const articlesWithLikeStatus = data.articles.map(article => ({
+          ...article,
+          liked: 0 // Default value is 0 (not liked)
+        }));
+
+        setArticles(articlesWithLikeStatus);
       } catch (error) {
         console.error('Error fetching news:', error);
       }
@@ -46,14 +51,24 @@ const NewsFeed = () => {
     trackMouse: true,
   });
 
+  // Function to toggle the like status of an article
+  const toggleLike = (articleToToggle) => {
+    const updatedArticles = articles.map(article =>
+      article === articleToToggle
+        ? { ...article, liked: !article.liked } // Toggle the 'liked' status
+        : article
+    );
+    setArticles(updatedArticles);
+  };
+
   return (
     <div className="news-feed" {...(isSmallScreen ? handlers : {})}>
       {articles.length > 0 ? (
         isSmallScreen ? (
-          <SmallNewsCard article={articles[currentIndex]} />
+          <SmallNewsCard article={articles[currentIndex]} onToggleLike={toggleLike} />
         ) : (
           articles.map((article, index) => (
-            <LargeNewsCard key={index} article={article} />
+            <LargeNewsCard key={index} article={article} onToggleLike={toggleLike} />
           ))
         )
       ) : (

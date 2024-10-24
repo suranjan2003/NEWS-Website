@@ -1,23 +1,44 @@
 import React from 'react';
 import moment from 'moment';
 import './styles.css';
-import { FaThumbsUp, FaShareAlt } from 'react-icons/fa';
+import { FaShareAlt } from 'react-icons/fa';
+import { GoHeart, GoHeartFill } from "react-icons/go";
 
-const SmallNewsCard = ({ article }) => {
-  const { title, description, urlToImage, source, publishedAt, url } = article;
+const SmallNewsCard = ({ article, onToggleLike }) => {
+  const { title, description, urlToImage, source, publishedAt, url, liked } = article;
+
+  const handleLikeClick = () => {
+    onToggleLike(article); // Call the parent function to toggle like status
+  };
+
+  const handleShare = () => {
+    if (navigator.share) {
+      navigator.share({
+        title: title || 'News Article',
+        text: description || 'Check out this news article!',
+        url: url || window.location.href,
+      })
+      .then(() => console.log('Article shared successfully'))
+      .catch((error) => console.error('Error sharing:', error));
+    } else {
+      console.log('Web Share API not supported in this browser');
+    }
+  };
 
   return (
     <div className="news-card small-card">
-      {(
-        <img
+      <img
         src={urlToImage || '/images/no-image.png'}
         alt={title}
         className="object-cover w-full h-56"
-        />
-      )}
+      />
       <div className="px-4 py-2">
-        <h2 className="text-base font-semibold">{(title=='[Removed]' || !title)? 'No title available':title}</h2>
-        <p className="text-sm text-gray-600">{(description=='[Removed]' || !description)? 'No description available':description}</p>
+        <h2 className="text-base font-semibold">
+          {(title === '[Removed]' || !title) ? 'No title available' : title}
+        </h2>
+        <p className="text-sm text-gray-600">
+          {(description === '[Removed]' || !description) ? 'No description available' : description}
+        </p>
         <a href={url || '#'} target="_blank" rel="noopener noreferrer" className="text-red-600 text-xs underline block">
           Read More
         </a>
@@ -27,11 +48,12 @@ const SmallNewsCard = ({ article }) => {
 
         {/* Like and Share Buttons */}
         <div className="flex items-center justify-start mt-1 ml-1 space-x-4">
-          <button className="flex items-center text-gray-600 hover:text-blue-500">
-            <FaThumbsUp/>
+          {/* Heart Button: Changes color based on `liked` state */}
+          <button onClick={handleLikeClick} className="flex items-center text-xl">
+            {liked ? <GoHeartFill className="text-red-600" /> : <GoHeart className="text-gray-600" />}
           </button>
-          <button className="flex items-center text-gray-600 hover:text-green-500">
-            <FaShareAlt/>
+          <button onClick={handleShare} className="flex items-center text-gray-600">
+            <FaShareAlt />
           </button>
         </div>
       </div>
