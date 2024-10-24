@@ -32,7 +32,7 @@ const LargeNewsCard = ({ article }) => {
           </div>
 
           {/* Like and Share Buttons */}
-        <div className="flex items-center justify-start mt-1 ml-1 space-x-3">
+        <div className="flex items-center justify-start mt-1 ml-1 space-x-4">
           <button className="flex items-center text-gray-600 hover:text-blue-500">
             <FaThumbsUp/>
           </button>
